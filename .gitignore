@@ -1,0 +1,5 @@
+﻿dist
+node_modules
+src/config/secret.ts
+src/access.log
+src/dbconfig.ts
