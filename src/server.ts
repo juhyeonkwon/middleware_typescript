@@ -13,10 +13,14 @@ import logger from 'morgan';
 import fs from 'fs';
 import path from 'path';
 import cors from 'cors';
+import swaggerUi from 'swagger-ui-express';
+import YAML from 'yamljs';
 
-const { swaggerUi, specs } = require('./modules/swagger');
+// const { swaggerUi, specs } = require('./modules/swagger');
 
 const app: express.Application = express();
+
+const specs = YAML.load(path.join(__dirname, '../build.yaml'));
 
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(specs));
 
@@ -53,7 +57,10 @@ app.use(express.urlencoded({ extended: false }));
 
 let elecar: express.Router = require('./routes/elecar');
 
+let auth: express.Router = require('./routes/user');
+
 app.use('/elecar', elecar);
+app.use('/auth', auth);
 
 server.listen('3000', () => {
     console.log('port 3000');

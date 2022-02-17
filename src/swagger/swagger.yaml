@@ -1,0 +1,28 @@
+openapi: 3.0.0
+info:
+  description: 'DXDATA의 middleware API입니다. DashBoard 링크 : http://dxdata.co.kr:8080/'
+  version: '1.0.0'
+  title: 'Middleware API'
+  contact:
+    email: 'dxdata@dxdata.co.kr'
+    url: 'http://www.dxdata.co.kr'
+
+basePath: /
+
+tags:
+  - name: 'elecar'
+    description: '고소차 API'
+  - name: 'user'
+    description: '사용자 관련'
+paths:
+  $ref: './api/path.yaml'
+
+components:
+  schemas:
+    $ref: './api/model.yaml'
+
+  securitySchemes:
+    JWT: # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT # optional, arbitrary value for documentation purposes

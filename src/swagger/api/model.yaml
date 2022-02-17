@@ -1,0 +1,233 @@
+###############################
+#           USER              #
+###############################
+User:
+  type: object
+  required:
+    - id
+    - password
+  properties:
+    id:
+      type: string
+    password:
+      type: string
+  example:
+    id: test3
+    password: test
+Overlap:
+  type: object
+  required:
+    - id
+  properties:
+    id:
+      type: string
+  example:
+    id: test3
+UserSignup:
+  type: object
+  required:
+    - id
+    - password
+    - department
+  properties:
+    id:
+      type: string
+    password:
+      type: string
+    department:
+      type: string
+  example:
+    id: test6
+    password: test
+    department: 디엑스데이터
+Password:
+  type: object
+  required:
+    - password
+    - new_password
+  properties:
+    password:
+      type: string
+    new_password:
+      type: string
+  example:
+    password: test
+    new_password: test1
+PasswordManage:
+  type: object
+  required:
+    - id
+    - password
+  properties:
+    id:
+      type: string
+    password:
+      type: string
+  example:
+    id: test
+    password: test
+UserDelete:
+  type: object
+  required:
+    - id
+  properties:
+    id:
+      type: string
+  example:
+    id: test6
+UserModify:
+  type: object
+  required:
+    - idx
+    - password
+    - department
+    - admin
+  properties:
+    id:
+      type: string
+    password:
+      type: string
+    department:
+      type: string
+    admin:
+      type: number
+  example:
+    idx: 1
+    password:
+    department: 디엑스데이터
+    admin: 0
+UserModifyAuth:
+  type: object
+  required:
+    - idx
+    - admin
+    - department
+  properties:
+    idx:
+      type: number
+    department:
+      type: string
+    admin:
+      type: number
+  example:
+    idx: 1
+    department: 디엑스데이타
+    admin: 0
+
+###############################
+#           elecar            #
+###############################
+Elecar:
+  type: object
+  required:
+    - eqp_id
+    - current_gps_lat
+    - current_gps_lon
+    - department:
+    - last_timestamp
+  properties:
+    eqp_id:
+      type: string
+    cur_gps_lat:
+      type: float
+    cur_gps_lon:
+      type: float
+    department:
+      type: string
+    last_timestamp:
+      type: string
+  example:
+    eqp_id: N-347
+    cur_gps_lat: 34.868243
+    cur_gps_lon: 128.700256
+    department: 디엑스데이타람쥐
+    last_timestamp: 2021-11-17 12:00:00
+
+ElecarMeasure:
+  type: object
+  required:
+    - eqp_id
+    - current_gps_lat
+    - current_gps_lon
+    - department
+    - last_timestamp
+  properties:
+    eqp_id:
+      type: string
+    gps_lon:
+      type: float
+    gps_lat:
+      type: float
+    eqp_spec_code:
+      type: string
+    department:
+      type: string
+    req_no:
+      type: string
+    use_date:
+      type: string
+    last_timestamp:
+      type: string
+  example:
+    eqp_id: N-347
+    gps_lon: 128.704069
+    gps_lat: 34.876778
+    eqp_spec_code: 38M
+    department: 디엑스데이타람쥐
+    req_no: '20200526034'
+    use_date: '20200601'
+    use_timestamp: '20200601_235959'
+
+ElecarRent:
+  type: object
+  required:
+    - start_time
+    - end_time
+    - eqp_id
+  properties:
+    start_time:
+      type: string
+    end_time:
+      type: string
+    eqp_id:
+      type: string
+  example:
+    eqp_id: N-229
+    start_time: 2021-12-07 12:00:00
+    end_time: 2021-12-07 13:00:00
+
+ElecarReserv:
+  type: object
+  required:
+    - eqp_id
+    - date
+    - start_time
+    - end_time
+    - department
+  properties:
+    eqp_id:
+      type: string
+    date:
+      type: string
+    start_time:
+      type: string
+    end_time:
+      type: string
+    department:
+      type: string
+  example:
+    eqp_id: N-229
+    date: 2021-12-07
+    start_time: 12:00
+    end_time: 13:00
+    department: 디엑스데이타람쥐
+
+ElecarReturn:
+  type: object
+  required:
+    - eqp_id
+  properties:
+    eqp_id:
+      type: string
+  example:
+    eqp_id: N-229

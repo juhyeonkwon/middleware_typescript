@@ -1,0 +1,126 @@
+###############################
+#           USER              #
+###############################
+/auth/login:
+  post:
+    tags:
+      - user
+    description: 로그인을 합니다
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../swagger.yaml#/components/schemas/User'
+    responses:
+      '200':
+        description: 토큰값을 가져옵니다.
+        content:
+          apllication/json:
+            schema:
+              properties:
+                auth:
+                  type: string
+/auth/signup:
+  post:
+    tags:
+      - user
+    description: 회원가입을 합니다.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../swagger.yaml#/components/schemas/UserSignup'
+    responses:
+      '200':
+        description: 현재 상태
+/auth/overlap:
+  post:
+    tags:
+      - user
+    description: 중복을 확인합니다.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../swagger.yaml#/components/schemas/Overlap'
+    responses:
+      '200':
+        description: 0은 중복 있음, 1은 중복 없음
+/auth/modify_auth:
+  put:
+    tags:
+      - user
+    description: 유저들의 부서와 권한을 수정합니다. 배열로 값을 받습니다
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../swagger.yaml#/components/schemas/UserModifyAuth'
+    responses:
+      '200':
+        description: 수정 성공 메세지
+    security:
+      - JWT: []
+/auth/delete:
+  delete:
+    tags:
+      - user
+    description: 유저를 삭제합니다.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../swagger.yaml#/components/schemas/UserDelete'
+    responses:
+      '200':
+        description: 삭제 성공 메세지
+    security:
+      - JWT: []
+/auth/password_user:
+  put:
+    tags:
+      - user
+    description: 사용자가 직접 자신의 비밀번호를 수정합니다.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../swagger.yaml#/components/schemas/Password'
+    responses:
+      '200':
+        description: 수정 성공 메세지
+    security:
+      - JWT: []
+/auth/password_author:
+  put:
+    tags:
+      - user
+    description: 관리자가 해당 사용자의 비밀번호를 수정합니다.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../swagger.yaml#/components/schemas/PasswordManage'
+    responses:
+      '200':
+        description: 수정 성공 메세지
+    security:
+      - JWT: []
+
+/auth/list:
+  get:
+    tags:
+      - user
+    description: 유저 리스트를 불러옵니다
+    responses:
+      '200':
+        description: 유저정보
