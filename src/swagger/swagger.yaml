@@ -10,10 +10,15 @@ info:
 basePath: /
 
 tags:
-  - name: 'elecar'
-    description: '고소차 API'
+  - name: 'board'
+    description: '공지사항 관련'
   - name: 'user'
     description: '사용자 관련'
+  - name: 'elecar'
+    description: '고소차 API'
+  - name: 'welding'
+    description: '용접기 API'
+
 paths:
   $ref: './api/path.yaml'
 

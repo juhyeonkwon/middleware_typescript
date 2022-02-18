@@ -58,9 +58,12 @@ app.use(express.urlencoded({ extended: false }));
 let elecar: express.Router = require('./routes/elecar');
 let welding: express.Router = require('./routes/welding');
 let auth: express.Router = require('./routes/user');
+let board: express.Router = require('./routes/board');
 
 app.use('/elecar', elecar);
 app.use('/welding', welding);
+app.use('/board', board);
+
 app.use('/auth', auth);
 
 server.listen('3000', () => {
