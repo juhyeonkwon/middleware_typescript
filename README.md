@@ -7,11 +7,16 @@ https://blog.naver.com/asshole96/222649317856
 
 # 실행
 
-1. npm install
+1. 모듈 설치
+```
+npm install
+```
 
 2. 스웨거 yaml 파일 bundling 
 
-  - swagger-cli bundle ./src/swagger/swagger.yaml --outfile ./build.yaml --type yaml
+```
+swagger-cli bundle ./src/swagger/swagger.yaml --outfile ./build.yaml --type yaml
+```
 
 3. 실행
 
