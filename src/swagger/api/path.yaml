@@ -2,125 +2,591 @@
 #           USER              #
 ###############################
 /auth/login:
-  post:
-    tags:
-      - user
-    description: 로그인을 합니다
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '../swagger.yaml#/components/schemas/User'
-    responses:
-      '200':
-        description: 토큰값을 가져옵니다.
-        content:
-          apllication/json:
-            schema:
-              properties:
-                auth:
-                  type: string
+    post:
+        tags:
+            - user
+        description: 로그인을 합니다
+        requestBody:
+            required: true
+            content:
+                application/json:
+                    schema:
+                        $ref: '../swagger.yaml#/components/schemas/User'
+        responses:
+            '200':
+                description: 토큰값을 가져옵니다.
+                content:
+                    apllication/json:
+                        schema:
+                            properties:
+                                auth:
+                                    type: string
 /auth/signup:
-  post:
-    tags:
-      - user
-    description: 회원가입을 합니다.
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '../swagger.yaml#/components/schemas/UserSignup'
-    responses:
-      '200':
-        description: 현재 상태
+    post:
+        tags:
+            - user
+        description: 회원가입을 합니다.
+        requestBody:
+            required: true
+            content:
+                application/json:
+                    schema:
+                        $ref: '../swagger.yaml#/components/schemas/UserSignup'
+        responses:
+            '200':
+                description: 현재 상태
 /auth/overlap:
-  post:
-    tags:
-      - user
-    description: 중복을 확인합니다.
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '../swagger.yaml#/components/schemas/Overlap'
-    responses:
-      '200':
-        description: 0은 중복 있음, 1은 중복 없음
+    post:
+        tags:
+            - user
+        description: 중복을 확인합니다.
+        requestBody:
+            required: true
+            content:
+                application/json:
+                    schema:
+                        $ref: '../swagger.yaml#/components/schemas/Overlap'
+        responses:
+            '200':
+                description: 0은 중복 있음, 1은 중복 없음
 /auth/modify_auth:
-  put:
-    tags:
-      - user
-    description: 유저들의 부서와 권한을 수정합니다. 배열로 값을 받습니다
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: '../swagger.yaml#/components/schemas/UserModifyAuth'
-    responses:
-      '200':
-        description: 수정 성공 메세지
-    security:
-      - JWT: []
+    put:
+        tags:
+            - user
+        description: 유저들의 부서와 권한을 수정합니다. 배열로 값을 받습니다
+        requestBody:
+            required: true
+            content:
+                application/json:
+                    schema:
+                        type: array
+                        items:
+                            $ref: '../swagger.yaml#/components/schemas/UserModifyAuth'
+        responses:
+            '200':
+                description: 수정 성공 메세지
+        security:
+            - JWT: []
 /auth/delete:
-  delete:
-    tags:
-      - user
-    description: 유저를 삭제합니다.
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '../swagger.yaml#/components/schemas/UserDelete'
-    responses:
-      '200':
-        description: 삭제 성공 메세지
-    security:
-      - JWT: []
+    delete:
+        tags:
+            - user
+        description: 유저를 삭제합니다.
+        requestBody:
+            required: true
+            content:
+                application/json:
+                    schema:
+                        $ref: '../swagger.yaml#/components/schemas/UserDelete'
+        responses:
+            '200':
+                description: 삭제 성공 메세지
+        security:
+            - JWT: []
 /auth/password_user:
-  put:
-    tags:
-      - user
-    description: 사용자가 직접 자신의 비밀번호를 수정합니다.
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '../swagger.yaml#/components/schemas/Password'
-    responses:
-      '200':
-        description: 수정 성공 메세지
-    security:
-      - JWT: []
+    put:
+        tags:
+            - user
+        description: 사용자가 직접 자신의 비밀번호를 수정합니다.
+        requestBody:
+            required: true
+            content:
+                application/json:
+                    schema:
+                        $ref: '../swagger.yaml#/components/schemas/Password'
+        responses:
+            '200':
+                description: 수정 성공 메세지
+        security:
+            - JWT: []
 /auth/password_author:
-  put:
-    tags:
-      - user
-    description: 관리자가 해당 사용자의 비밀번호를 수정합니다.
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '../swagger.yaml#/components/schemas/PasswordManage'
-    responses:
-      '200':
-        description: 수정 성공 메세지
-    security:
-      - JWT: []
+    put:
+        tags:
+            - user
+        description: 관리자가 해당 사용자의 비밀번호를 수정합니다.
+        requestBody:
+            required: true
+            content:
+                application/json:
+                    schema:
+                        $ref: '../swagger.yaml#/components/schemas/PasswordManage'
+        responses:
+            '200':
+                description: 수정 성공 메세지
+        security:
+            - JWT: []
 
 /auth/list:
-  get:
-    tags:
-      - user
-    description: 유저 리스트를 불러옵니다
-    responses:
-      '200':
-        description: 유저정보
+    get:
+        tags:
+            - user
+        description: 유저 리스트를 불러옵니다
+        responses:
+            '200':
+                description: 유저정보
+
+###############################
+#           ELECAR            #
+###############################
+/elecar/current:
+    get:
+        tags:
+            - elecar
+        description: 고소차의 현재 상태 조회
+        responses:
+            '200':
+                description: 현재 상태
+                content:
+                    apllication/json:
+                        schema:
+                            $ref: '../swagger.yaml#/components/schemas/Elecar'
+        security:
+            - JWT: []
+
+/elecar/measure:
+    post:
+        tags:
+            - elecar
+        description: 고소차의 실시간 정보를 POST합니다
+        requestBody:
+            required: true
+            content:
+                application/json:
+                    schema:
+                        $ref: '../swagger.yaml#/components/schemas/ElecarMeasure'
+        responses:
+            '200':
+                description: 현재 상태
+                content:
+                    apllication/json:
+                        schema:
+                            $ref: '../swagger.yaml#/components/schemas/ElecarMeasure'
+/elecar/locations:
+    get:
+        tags:
+            - elecar
+        description: 고소차의 상세 정보 조회 (N-307_2020-06-01)
+        parameters:
+            - in: query
+              name: key
+              schema:
+                  type: string
+        example:
+            key: N-255_2020-06-01
+        responses:
+            '200':
+                description: 상세정보
+/elecar/usinglocation:
+    get:
+        tags:
+            - elecar
+        description: 사용중인 고소차들의 위치 정보 제공
+        responses:
+            '200':
+                description: 위치정보
+/elecar/rent:
+    post:
+        tags:
+            - elecar
+        description: 고소차를 대여합니다.
+        requestBody:
+            required: true
+            content:
+                application/json:
+                    schema:
+                        $ref: '../swagger.yaml#/components/schemas/ElecarRent'
+        responses:
+            '200':
+                description: 현재 상태
+                content:
+                    apllication/json:
+                        schema:
+                            $ref: '../swagger.yaml#/components/schemas/ElecarRent'
+        security:
+            - JWT: []
+
+/elecar/return:
+    post:
+        tags:
+            - elecar
+        description: 사용중인 고소차를 반납합니다.
+        requestBody:
+            required: true
+            content:
+                application/json:
+                    schema:
+                        $ref: '../swagger.yaml#/components/schemas/ElecarReturn'
+        responses:
+            '200':
+                description: 현재 상태
+                content:
+                    apllication/json:
+                        schema:
+                            $ref: '../swagger.yaml#/components/schemas/ElecarReturn'
+        security:
+            - JWT: []
+
+/elecar/reservation:
+    get:
+        tags:
+            - elecar
+        description: 고소차에 대한 예약을 확인합니다.
+        parameters:
+            - in: query
+              name: eqp_id
+              schema:
+                  type: string
+            - in: query
+              name: date
+              schema:
+                  type: string
+        example:
+            key: N255
+            date: 2020-06-01
+        responses:
+            '200':
+                description: 상세정보
+    post:
+        tags:
+            - elecar
+        description: 고소차에 대해 예약을 합니다.
+        requestBody:
+            required: true
+            content:
+                application/json:
+                    schema:
+                        $ref: '../swagger.yaml#/components/schemas/ElecarReserv'
+        responses:
+            '200':
+                description: 현재 상태
+                content:
+                    apllication/json:
+                        schema:
+                            $ref: '../swagger.yaml#/components/schemas/ElecarReserv'
+        security:
+            - JWT: []
+/elecar/canclereserve:
+    delete:
+        tags:
+            - elecar
+        description: 고소차에 대해 예약을 취소합니다.
+        requestBody:
+            required: true
+            content:
+                application/json:
+                    schema:
+                        type: object
+                        required:
+                            - reserv_id
+                        properties:
+                            reserv_id:
+                                type: string
+        responses:
+            '200':
+                description: 삭제정보
+        security:
+            - JWT: []
+/elecar/usage:
+    get:
+        tags:
+            - elecar
+        description: 고소차의 최근 7일 사용량을 제공합니다
+        responses:
+            '200':
+                description: 주간사용량
+
+###############################
+#           Welding           #
+###############################
+
+/welding/gbs03/measure:
+    post:
+        tags:
+            - welding
+        description: GBS03 용접기의 실시간 정보를 전송합니다.
+        requestBody:
+            required: true
+            content:
+                application/json:
+                    schema:
+                        $ref: '../swagger.yaml#/components/schemas/WeldingMeasure'
+        responses:
+            '200':
+                description: 현재 상태
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../swagger.yaml#/components/schemas/WeldingMeasure'
+    get:
+        tags:
+            - welding
+        description: 용접기 gbs03의 측정 정보들을 가져옵니다. (GBS031404)
+        parameters:
+            - in: query
+              name: eqp_id
+              schema:
+                  type: string
+        example:
+            eqp_id: GBS031404
+        responses:
+            '200':
+                description: 현재 상태
+        security:
+            - JWT: []
+/welding/gbs03/current:
+    get:
+        tags:
+            - welding
+        description: 용접기 gbs03의 현재 상태를 불러옵니다
+        responses:
+            '200':
+                description: 현재 상태
+                content:
+                    apllication/json:
+                        schema:
+                            $ref: '../swagger.yaml#/components/schemas/Welding'
+        security:
+            - JWT: []
+/welding/gbs03/average:
+    get:
+        tags:
+            - welding
+        description: 용접기 gbs03의 평균 정보를 가져옵니다. (GBS031404)
+        parameters:
+            - in: query
+              name: eqp_id
+              schema:
+                  type: string
+        example:
+            eqp_id: GBS031404
+        responses:
+            '200':
+                description: 현재 상태
+        security:
+            - JWT: []
+/welding/tbar/measure:
+    post:
+        tags:
+            - welding
+        description: tbar 용접기의 실시간 정보를 전송합니다.
+        requestBody:
+            required: true
+            content:
+                application/json:
+                    schema:
+                        $ref: '../swagger.yaml#/components/schemas/WeldingMeasure'
+        responses:
+            '200':
+                description: 현재 상태
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../swagger.yaml#/components/schemas/WeldingMeasure'
+    get:
+        tags:
+            - welding
+        description: 용접기 tbar의 측정 정보들을 가져옵니다. (TBAR0001)
+        parameters:
+            - in: query
+              name: eqp_id
+              schema:
+                  type: string
+        example:
+            eqp_id: TBAR0001
+        responses:
+            '200':
+                description: 현재 상태
+        security:
+            - JWT: []
+
+/welding/tbar/current:
+    get:
+        tags:
+            - welding
+        description: 용접기 tbar의 현재 상태를 불러옵니다
+        responses:
+            '200':
+                description: 현재 상태
+                content:
+                    apllication/json:
+                        schema:
+                            $ref: '../swagger.yaml#/components/schemas/Welding'
+        security:
+            - JWT: []
+/welding/tbar/average:
+    get:
+        tags:
+            - welding
+        description: 용접기 tbar의 평균 정보를 가져옵니다. (TBAR0001)
+        parameters:
+            - in: query
+              name: eqp_id
+              schema:
+                  type: string
+        example:
+            eqp_id: TBAR0001
+        responses:
+            '200':
+                description: 현재 상태
+        security:
+            - JWT: []
+/welding/using:
+    get:
+        tags:
+            - welding
+        description: 현재 사용중인 용접기들의 리스트를 불러옵니다.
+        responses:
+            '200':
+                description: 사용중인 용접기 리스트
+                content:
+                    apllication/json:
+                        schema:
+                            $ref: '../swagger.yaml#/components/schemas/Welding'
+        security:
+            - JWT: []
+/welding/usage:
+    get:
+        tags:
+            - welding
+        description: 용접기의 사용량을 확인합니다! tbar 또는 gbs03을 파라미터로 받습니다.
+        parameters:
+            - in: query
+              name: type
+              schema:
+                  type: string
+        example:
+            type: gbs03
+        responses:
+            '200':
+                description: 사용량
+        security:
+            - JWT: []
+/welding/watts:
+    get:
+        tags:
+            - welding
+        description: 용접기의 전력 사용량을 확인합니다. query로 gbs03, tbar를 입력합니다.
+        parameters:
+            - in: query
+              name: type
+              schema:
+                  type: string
+        example:
+            type: gbs03
+        responses:
+            '200':
+                description: 사용량
+        security:
+            - JWT: []
+
+/welding/watts/rank:
+    get:
+        tags:
+            - welding
+        description: 전날 전력 사용량이 높은 용접기들을 확인합니다(10개). query로 gbs03, tbar를 입력합니다.
+        parameters:
+            - in: query
+              name: type
+              schema:
+                  type: string
+        example:
+            type: gbs03
+        responses:
+            '200':
+                description: 사용량
+        security:
+            - JWT: []
+/welding/rent:
+    put:
+        tags:
+            - welding
+        description: 용접기를 대여합니다.
+        requestBody:
+            required: true
+            content:
+                application/json:
+                    schema:
+                        $ref: '../swagger.yaml#/components/schemas/WeldingRent'
+        responses:
+            '200':
+                description: 1
+            '401':
+                description: -1
+        security:
+            - JWT: []
+/welding/return:
+    put:
+        tags:
+            - welding
+        description: 용접기를 반납합니다.
+        requestBody:
+            required: true
+            content:
+                application/json:
+                    schema:
+                        $ref: '../swagger.yaml#/components/schemas/WeldingReturn'
+        responses:
+            '200':
+                description: 1
+            '401':
+                description: -1
+        security:
+            - JWT: []
+
+/welding/reservation:
+    get:
+        tags:
+            - welding
+        description: 용접기에 대한 예약을 확인합니다.
+        parameters:
+            - in: query
+              name: eqp_id
+              schema:
+                  type: string
+            - in: query
+              name: date
+              schema:
+                  type: string
+        example:
+            key: TBAR0001
+            date: '2021-12-17'
+        responses:
+            '200':
+                description: 예약정보
+    post:
+        tags:
+            - welding
+        description: 용접기에 대해 예약을 합니다.
+        requestBody:
+            required: true
+            content:
+                application/json:
+                    schema:
+                        $ref: '../swagger.yaml#/components/schemas/WeldingReserv'
+        responses:
+            '200':
+                description: affectedRows
+        security:
+            - JWT: []
+
+/welding/canclereserve:
+    delete:
+        tags:
+            - welding
+        description: 고소차에 대해 예약을 취소합니다.
+        requestBody:
+            required: true
+            content:
+                application/json:
+                    schema:
+                        type: object
+                        required:
+                            - reserv_id
+                        properties:
+                            reserv_id:
+                                type: string
+        responses:
+            '200':
+                description: 삭제정보
+        security:
+            - JWT: []

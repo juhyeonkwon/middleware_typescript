@@ -24,9 +24,9 @@ const specs = YAML.load(path.join(__dirname, '../build.yaml'));
 
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(specs));
 
-const server = createServer(app);
+const server: any = createServer(app);
 
-const io = require('socket.io')(server, {
+const io: any = require('socket.io')(server, {
     allowEIO3: true,
     cors: {
         origin: '*', //나중에 서비스 할 때 origin을 변경해줘야 합니다 (cors문제)
@@ -56,12 +56,24 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 let elecar: express.Router = require('./routes/elecar');
-
+let welding: express.Router = require('./routes/welding');
 let auth: express.Router = require('./routes/user');
 
 app.use('/elecar', elecar);
+app.use('/welding', welding);
 app.use('/auth', auth);
 
 server.listen('3000', () => {
     console.log('port 3000');
 });
+
+//소켓관련
+io.on('connection', (socket: any) => {
+    console.log('user connected');
+
+    socket.on('disconnect', () => {
+        console.log('user discconnected');
+    });
+});
+
+module.exports = app;

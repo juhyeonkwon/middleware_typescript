@@ -231,3 +231,263 @@ ElecarReturn:
       type: string
   example:
     eqp_id: N-229
+
+###############################
+#           Welding           #
+###############################
+Welding:
+  type: object
+  required:
+    - eqp_id
+    - use_yn
+    - department
+  properties:
+    eqp_id:
+      type: string
+    use_yn:
+      type: string
+    department:
+      type: string
+  example:
+    eqp_id: GBS031301(TBAR0001)
+    use_yn: 1
+    department: 디엑스데이타람쥐
+WeldingRent:
+  type: object
+  required:
+    - eqp_id
+    - use_yn
+    - start_time
+    - end_time
+    - type
+  properties:
+    eqp_id:
+      type: string
+    use_yn:
+      type: string
+    start_time:
+      type: string
+    end_time:
+      type: string
+    type:
+      type: string
+  example:
+    eqp_id: GBS031301(TBAR0001)
+    use_yn: 1
+    start_time: 2021-12-17 13:00:00
+    end_time: 2021-12-17 14:00:00
+    type: gbs03
+WeldingReturn:
+  type: object
+  required:
+    - eqp_id
+    - type
+  properties:
+    eqp_id:
+      type: string
+    type:
+      type: string
+  example:
+    eqp_id: GBS031301(TBAR0001)
+    type: tbar
+WeldingReserv:
+  type: object
+  required:
+    - eqp_id
+    - date
+    - start_time
+    - end_time
+    - department
+    - type
+  properties:
+    eqp_id:
+      type: string
+    date:
+      type: string
+    start_time:
+      type: string
+    end_time:
+      type: string
+    department:
+      type: string
+  example:
+    eqp_id: TBAR0001
+    date: 2021-12-17
+    start_time: 12:00
+    end_time: 13:00
+    department: 디엑스데이타
+    type: tbar
+WeldingMeasure:
+  type: object
+  required:
+    - eqp_id
+    - date
+    - acquisition_rate
+    - welding_time
+    - avg_amp
+    - avg_volt
+    - avg_welding_volt
+    - avg_wirespeed
+    - sum_wire
+    - sum_inching_wire
+    - sum_total_wire
+  properties:
+    eqp_id:
+      type: string
+    date:
+      type: string
+    acquisition_rate:
+      type: float
+    welding_time:
+      type: float
+    avg_amp:
+      type: float
+    avg_volt:
+      type: float
+    avg_welding_volt:
+      type: float
+    avg_wirespeed:
+      type: float
+    sum_wire:
+      type: float
+    sum_inching_wire:
+      type: float
+    sum_total_wire:
+      type: float
+  example:
+    eqp_id: GBS031301(TBAR0001)
+    date: 2021-11-18
+    acquisition_rate: 99.7
+    welding_time: 60.5
+    avg_amp: 392.03
+    avg_volt: 32
+    avg_welding_volt: 32.03
+    avg_wirespeed: 32.27
+    sum_wire: 0.14
+    sum_inching_wire: 0
+    sum_total_wire: 0.14
+
+###############################
+#           Crane             #
+###############################
+CraneMeasure:
+  type: object
+  required:
+    - timestamp
+    - crane_id
+    - gps_lon
+    - gps_lat
+    - department
+    - data1
+    - data2
+    - data3
+  properties:
+    timestamp:
+      type: string
+    crane_id:
+      type: string
+    gps_lat:
+      type: float
+    gps_lon:
+      type: float
+    department:
+      type: string
+    data1:
+      type: string
+    data2:
+      type: string
+    data3:
+      type: string
+  example:
+    timestamp: 2021-11-17 12:00:00
+    crane_id: crane_1
+    gps_lat: 34.868243
+    gps_lon: 128.700256
+    department: DXDATA
+    data1: string
+    data2: string
+    data3: string
+Crane:
+  type: object
+  required:
+    - crane_id
+    - cur_gps_lat
+    - cur_gps_lon
+    - department:
+    - last_timestamp
+    - rental_end
+    - rental_start
+  properties:
+    crane_id:
+      type: string
+    cur_gps_lat:
+      type: float
+    cur_gps_lon:
+      type: float
+    department:
+      type: string
+    last_timestamp:
+      type: string
+    rental_end:
+      type: string
+    rental_start:
+      type: string
+  example:
+    crane_id: crane_1
+    cur_gps_lat: 34.868243
+    cur_gps_lon: 128.700256
+    department: 디엑스데이다람쥐
+    last_timestamp: 2021-11-17 12:00:00
+    rental_end: 2021-11-17 12:00:00
+    rental_start: 2021-11-17 12:00:00
+
+###############################
+#           Notice            #
+###############################
+Notice:
+  type: object
+  required:
+    - title
+    - content
+    - date
+  properties:
+    title:
+      type: string
+    content:
+      type: string
+    date:
+      type: string
+  example:
+    title: 제목 다람쥐
+    content: 내용이다람쥐
+    date: 2022-01-07 15:00:00
+NoticeLogin:
+  type: object
+  required:
+    - title
+    - date
+    - user_id
+  properties:
+    title:
+      type: string
+    date:
+      type: string
+    user_id:
+      type: string
+
+###############################
+#           ETC               #
+###############################
+Insert:
+  type: object
+  properties:
+    affectedRows:
+      type: number
+    insertId:
+      type: number
+    warningStatus:
+      type: number
+  example:
+    affectedRows: 1
+    insertId: 3
+    warningStatus: 0
