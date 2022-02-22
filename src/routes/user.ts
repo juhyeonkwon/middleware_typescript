@@ -228,4 +228,8 @@ router.get('/list', async function (req: express.Request, res: express.Response)
   });
 });
 
+router.post('/check', jwt.auth, function(req, res) {
+  res.send('1');
+})
+
 module.exports = router;

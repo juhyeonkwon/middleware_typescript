@@ -7,15 +7,18 @@ const dbconfig: any = require('../dbconfig');
 
 //소켓을 위한 app
 const app: any = require('../server');
-//레디스 세팅
-const client = createClient({
-    url: 'redis://:1234@192.168.0.21:6379',
-});
+
+
 
 const router: express.Router = express.Router();
 
 //gbs03 값 입력받는다
 router.post('/gbs03/measure', async function (req: express.Request, res: express.Response) {
+    //레디스 세팅
+    const client = createClient({
+        url: 'redis://:1234@192.168.0.21:6379',
+    });
+
     let param: Array<any> = [req.body.eqp_id, req.body.date, req.body.acquisition_rate, req.body.welding_time, req.body.avg_amp, req.body.avg_volt, req.body.avg_welding_volt, req.body.avg_wirespeed, req.body.sum_wire, req.body.sum_inching_wire, req.body.sum_total_wire];
 
     let sql: string = 'INSERT INTO gbs03_measure(eqp_id, date, acquisition_rate, welding_time, avg_amp, avg_volt, avg_welding_volt, avg_wirespeed, sum_wire, sum_inching_wire, sum_total_wire) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )';
@@ -39,11 +42,12 @@ router.post('/gbs03/measure', async function (req: express.Request, res: express
                     await client.SET(param[1] + '_watt_' + 'gbs03', watt);
                 }
 
-                await client.disconnect();
             } catch (e: any) {
                 res.send(e);
             } finally {
                 connection.end();
+                await client.disconnect();
+
             }
         })
         .catch((err: any) => {
@@ -109,6 +113,10 @@ router.get('/gbs03/average', auth.auth, function (req: express.Request, res: exp
 });
 
 router.post('/tbar/measure', function (req: express.Request, res: express.Response) {
+    //레디스 세팅
+    const client = createClient({
+        url: 'redis://:1234@192.168.0.21:6379',
+    });
     let param: Array<any> = [req.body.eqp_id, req.body.date, req.body.acquisition_rate, req.body.welding_time, req.body.avg_amp, req.body.avg_volt, req.body.avg_welding_volt, req.body.avg_wirespeed, req.body.sum_wire, req.body.sum_inching_wire, req.body.sum_total_wire];
 
     let sql: string = 'INSERT INTO tbar_measure(eqp_id, date, acquisition_rate, welding_time, avg_amp, avg_volt, avg_welding_volt, avg_wirespeed, sum_wire, sum_inching_wire, sum_total_wire) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )';
@@ -218,6 +226,10 @@ router.get('/using', auth.auth, function (req: express.Request, res: express.Res
 
 //사용량을 확인합니다람쥐..
 router.get('/usage', auth.auth, async function (req: express.Request, res: express.Response) {
+    //레디스 세팅
+    const client = createClient({
+        url: 'redis://:1234@192.168.0.21:6379',
+    });
     let type: string;
     if (req.query.type === 'tbar') {
         type = 'tbar';
@@ -244,6 +256,10 @@ router.get('/usage', auth.auth, async function (req: express.Request, res: expre
 
 //일주일간 전력 사용량 확인
 router.get('/watts', auth.auth, async function (req: express.Request, res: express.Response) {
+    //레디스 세팅
+    const client = createClient({
+        url: 'redis://:1234@192.168.0.21:6379',
+    });
     let type: string = <string>req.query.type;
     let today: Date = new Date();
 
@@ -334,6 +350,10 @@ router.get('/watts/rank', auth.auth, function (req: express.Request, res: expres
 
 //대여
 router.put('/rent', auth.auth, async function (req: express.Request, res: express.Response) {
+    //레디스 세팅
+    const client = createClient({
+        url: 'redis://:1234@192.168.0.21:6379',
+    });
     //파라미터로 tbar인지 gbs03인지 여부를 받는다
 
     let sql: string, sql2: string, type: string;

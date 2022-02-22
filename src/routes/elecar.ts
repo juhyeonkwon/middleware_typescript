@@ -7,10 +7,7 @@ const dbconfig: any = require('../dbconfig');
 
 //소켓을 위한 app
 const app: any = require('../server');
-//레디스 세팅
-const client = createClient({
-    url: 'redis://:1234@192.168.0.21:6379',
-});
+
 
 const router: express.Router = express.Router();
 
@@ -35,6 +32,10 @@ router.get('/current', auth.auth, async function (req: express.Request, res: exp
 
 //elecar의 정보를 가져옵니다.
 router.post('/measure', async function (req: express.Request, res: express.Response) {
+    //레디스 세팅
+    const client = createClient({
+        url: 'redis://:1234@192.168.0.21:6379',
+    });
     maria.createConnection(dbconfig.mariaConf).then(async (connection) => {
         let param: Array<any> = [
             req.body.eqp_id,
@@ -81,6 +82,10 @@ router.post('/measure', async function (req: express.Request, res: express.Respo
 
 //elecar의 상세정보를 불러옵니다
 router.get('/locations', async function (req: express.Request, res: express.Response) {
+    //레디스 세팅
+    const client = createClient({
+        url: 'redis://:1234@192.168.0.21:6379',
+    });
     let key: string = <string>req.query.key;
 
     await client.connect();
@@ -110,6 +115,10 @@ router.get('/usinglocation', function (req: express.Request, res: express.Respon
 
 //고소차 대여
 router.post('/rent', auth.auth, function (req: express.Request, res: express.Response) {
+    //레디스 세팅
+    const client = createClient({
+        url: 'redis://:1234@192.168.0.21:6379',
+    });
     maria.createConnection(dbconfig.mariaConf).then(async (connection) => {
         const param: Array<any> = [await auth.verifynotasync((<string>req.headers.authorization).split('Bearer ')[1]).id, req.body.start_time, req.body.end_time, req.body.eqp_id];
 
@@ -237,6 +246,10 @@ router.delete('/canclereserve', auth.auth, function (req: express.Request, res: 
 });
 
 router.get('/usage', async function (req: express.Request, res: express.Response) {
+    //레디스 세팅
+    const client = createClient({
+        url: 'redis://:1234@192.168.0.21:6379',
+    });
     let today: Date = new Date();
 
     // today.setHours(today.getHours() + 9);

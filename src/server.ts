@@ -66,8 +66,8 @@ app.use('/board', board);
 
 app.use('/auth', auth);
 
-server.listen('3000', () => {
-    console.log('port 3000');
+server.listen('3333', () => {
+    console.log('port 3333');
 });
 
 //소켓관련
