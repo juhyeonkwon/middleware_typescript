@@ -15,6 +15,7 @@ import path from 'path';
 import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
+import WebSocket, { WebSocketServer } from 'ws';
 
 // const { swaggerUi, specs } = require('./modules/swagger');
 
@@ -27,14 +28,14 @@ app.use('/swagger', swaggerUi.serve, swaggerUi.setup(specs));
 const server: any = createServer(app);
 
 const io: any = require('socket.io')(server, {
+  allowEIO3: true,
+  cors: {
+    origin: '*', //나중에 서비스 할 때 origin을 변경해줘야 합니다 (cors문제)
+    methods: ['GET', 'POST'],
+    credentials: true,
     allowEIO3: true,
-    cors: {
-        origin: '*', //나중에 서비스 할 때 origin을 변경해줘야 합니다 (cors문제)
-        methods: ['GET', 'POST'],
-        credentials: true,
-        allowEIO3: true,
-    },
-    transport: ['websocket'],
+  },
+  transport: ['websocket'],
 });
 
 //cors 설정
@@ -67,16 +68,26 @@ app.use('/board', board);
 app.use('/auth', auth);
 
 server.listen('3333', () => {
-    console.log('port 3333');
+  console.log('port 3333');
 });
 
 //소켓관련
 io.on('connection', (socket: any) => {
-    console.log('user connected');
+  console.log('user connected');
 
-    socket.on('disconnect', () => {
-        console.log('user discconnected');
-    });
+  socket.on('disconnect', () => {
+    console.log('user discconnected');
+  });
+});
+
+let wss = new WebSocketServer({
+  port: 3336,
+});
+
+wss.on('connection', function (ws, req) {
+  console.log('socket connected');
+  app.set('ws', ws);
+  ws.send('hi');
 });
 
 module.exports = app;

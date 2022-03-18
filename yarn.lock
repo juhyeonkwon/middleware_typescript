@@ -266,6 +266,13 @@
     "@types/express" "*"
     "@types/serve-static" "*"
 
+"@types/ws@^8.5.3":
+  "integrity" "sha512-6YOoWjruKj1uLf3INHH7D3qTXwFfEsg1kf3c0uDdSBJwfa/llkwIjrAGV7j7mVgGNbzTQ3HiHKKDXl6bJPD97w=="
+  "resolved" "https://registry.npmjs.org/@types/ws/-/ws-8.5.3.tgz"
+  "version" "8.5.3"
+  dependencies:
+    "@types/node" "*"
+
 "@types/yamljs@^0.2.31":
   "integrity" "sha512-QcJ5ZczaXAqbVD3o8mw/mEBhRvO5UAdTtbvgwL/OgoWubvNBh6/MxLBAigtcgIFaq3shon9m3POIxQaLQt4fxQ=="
   "resolved" "https://registry.npmjs.org/@types/yamljs/-/yamljs-0.2.31.tgz"
@@ -1984,6 +1991,11 @@
     "is-typedarray" "^1.0.0"
     "signal-exit" "^3.0.2"
     "typedarray-to-buffer" "^3.1.5"
+
+"ws@^8.5.0":
+  "integrity" "sha512-BWX0SWVgLPzYwF8lTzEy1egjhS4S4OEAHfsO8o65WOVsrnSRGaSiUaa9e0ggGlkMTtBlmOpEXiie9RUcBO86qg=="
+  "resolved" "https://registry.npmjs.org/ws/-/ws-8.5.0.tgz"
+  "version" "8.5.0"
 
 "ws@~8.2.3":
   "integrity" "sha512-wBuoj1BDpC6ZQ1B7DWQBYVLphPWkm8i9Y0/3YdHjHKHiohOJ1ws+3OccDWtH+PoC9DZD5WOTrJvNbWvjS6JWaA=="
